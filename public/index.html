@@ -3,44 +3,67 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SMARTCV GENERATOR</title>
-  <style>
-    body {
-      font-family: "Montserrat", sans-serif;
-      background: #f8f8f8;
-      color: #222;
-      text-align: center;
-      padding: 50px;
-    }
-
-    h1 {
-      font-size: 40px;
-      margin-bottom: 10px;
-    }
-
-    p {
-      font-size: 18px;
-      margin-bottom: 30px;
-    }
-
-    button {
-      padding: 12px 30px;
-      font-size: 16px;
-      background: black;
-      color: white;
-      border: none;
-      border-radius: 6px;
-      cursor: pointer;
-    }
-
-    button:hover {
-      background: #333;
-    }
-  </style>
+  <title>SmartCV Generator</title>
+  <link rel="stylesheet" href="style.css" />
+  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Roboto&display=swap" rel="stylesheet">
+  <script src="https://kit.fontawesome.com/a2c3fae93c.js" crossorigin="anonymous"></script>
 </head>
 <body>
-  <h1>SMARTCV GENERATOR</h1>
-  <p>100% унікальні резюме. Професійно. Стильно. Результативно.</p>
-  <button onclick="alert('Форма зʼявиться в наступному кроці')">Створити резюме</button>
+  <header>
+    <h1>SMARTCV GENERATOR</h1>
+    <p>100% унікальні резюме. Професійно. Стильно. Результативно.</p>
+    <button onclick="document.getElementById('categories').scrollIntoView({behavior: 'smooth'})">Створити резюме</button>
+  </header>
+
+  <main>
+    <section id="categories">
+      <div class="category">
+        <h2>Professional</h2>
+        <p>Під сферу: завод, офіс, логістика. PDF+Word</p>
+        <p class="price">$4.99</p>
+        <button>Детальніше</button>
+      </div>
+      <div class="category">
+        <h2>Creative</h2>
+        <p>Для творчих професій. Стиль + AI-детектор</p>
+        <p class="price">$9.99</p>
+        <button>Детальніше</button>
+      </div>
+      <div class="category">
+        <h2>VIP Pack</h2>
+        <p>До 50 резюме/місяць. Повна автоматизація</p>
+        <p class="price">$59.99</p>
+        <button>Детальніше</button>
+      </div>
+      <div class="category">
+        <h2>Funny CVs</h2>
+        <p>Смішні резюме: до Санти, кота, друга</p>
+        <p class="price">$2.00</p>
+        <button>Детальніше</button>
+      </div>
+      <div class="category">
+        <h2>Romantic CVs</h2>
+        <p>Зізнання, "я сумую", анкети для кохання</p>
+        <p class="price">$2.00</p>
+        <button>Детальніше</button>
+      </div>
+      <div class="category">
+        <h2>Apology CVs</h2>
+        <p>Вибачення — серйозні або з гумором</p>
+        <p class="price">$2.00</p>
+        <button>Детальніше</button>
+      </div>
+      <div class="category">
+        <h2>Entertaining</h2>
+        <p>Fan CVs, Say It Differently, Spicy (18+)</p>
+        <p class="price">$2–3.00</p>
+        <button>Детальніше</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 SmartCV Generator</p>
+  </footer>
 </body>
 </html>
