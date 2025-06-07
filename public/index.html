@@ -132,5 +132,25 @@
   <footer>
     <p>&copy; 2025 SmartCV Generator</p>
   </footer>
+<script>
+  const historyList = document.getElementById('historyList');
+  const button = document.querySelector('#cv-form button');
+
+  button.addEventListener('click', () => {
+    const type = document.getElementById('type').value;
+    const topic = document.getElementById('topic').value;
+    const style = document.getElementById('style').value;
+    const email = document.getElementById('email').value;
+
+    if (!topic || !email) {
+      alert("Будь ласка, заповніть тему і email.");
+      return;
+    }
+
+    const item = document.createElement('li');
+    item.innerHTML = <strong>${type}</strong> — ${topic} — <em>${email}</em> — [${style}];
+    historyList.appendChild(item);
+  });
+</script>
 </body>
 </html>
