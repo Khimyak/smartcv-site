@@ -68,3 +68,33 @@ footer {
   text-align: center;
   padding: 20px;
 }
+#why-us {
+  padding: 40px 20px;
+  background-color: #f1f1f1;
+  text-align: center;
+}
+
+#why-us h2 {
+  font-family: 'Playfair Display', serif;
+  margin-bottom: 25px;
+}
+
+.features {
+  list-style: none;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  padding: 0;
+  gap: 20px;
+}
+
+.features li {
+  font-size: 1.1em;
+  background: white;
+  padding: 15px 20px;
+  border-radius: 10px;
+  box-shadow: 0 3px 8px rgba(0,0,0,0.1);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
