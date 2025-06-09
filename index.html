@@ -25,5 +25,46 @@
   <footer>
     <p>© 2025 SmartCV Generator</p>
   </footer>
+
+<section class="form-section" id="form">
+  <h2>Створити резюме</h2>
+  <form id="cvForm">
+    <label for="category">Категорія:</label>
+    <select id="category" name="category" required>
+      <option value="Professional">Professional</option>
+      <option value="Creative">Creative</option>
+      <option value="VIP Pack">VIP Pack</option>
+      <option value="Funny">Funny</option>
+      <option value="Romantic">Romantic</option>
+      <option value="Apology">Apology</option>
+      <option value="Entertaining">Entertaining</option>
+    </select>
+
+    <label for="tone">Стиль:</label>
+    <select id="tone" name="tone" required>
+      <option value="Серйозно">Серйозно</option>
+      <option value="З гумором">З гумором</option>
+      <option value="Сексуально">Сексуально</option>
+      <option value="Щиро">Щиро</option>
+    </select>
+
+    <label for="target">Ім’я/кому адресовано:</label>
+    <input type="text" id="target" name="target" placeholder="Наприклад: Ігорю" required />
+
+    <label for="email">Email для надсилання:</label>
+    <input type="email" id="email" name="email" placeholder="you@example.com" required />
+
+    <button type="submit">Згенерувати</button>
+  </form>
+</section>
+
+<script>
+  const form = document.getElementById('cvForm');
+  form.addEventListener('submit', function(e) {
+    e.preventDefault();
+    alert("✅ Дані відправлено (тестовий режим). Поки що PDF не надсилається.");
+  });
+</script>
+
 </body>
 </html>
