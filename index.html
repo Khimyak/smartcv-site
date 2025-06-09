@@ -58,13 +58,46 @@
   </form>
 </section>
 
+
 <script>
-  const form = document.getElementById('cvForm');
-  form.addEventListener('submit', function(e) {
-    e.preventDefault();
-    alert("✅ Дані відправлено (тестовий режим). Поки що PDF не надсилається.");
-  });
+document.getElementById("cvForm").addEventListener("submit", function(e) {
+  e.preventDefault();
+
+  const category = document.getElementById("category").value;
+  const tone = document.getElementById("tone").value;
+  const target = document.getElementById("target").value;
+  const email = document.getElementById("email").value;
+
+  const text = 
+    "SMARTCV RESUME
+
+" +
+    "Category: " + category + "
+" +
+    "Tone: " + tone + "
+" +
+    "To: " + target + "
+
+" +
+    "Dear " + target + ",
+
+" +
+    "This is a sample resume generated in the tone of '" + tone + "' for the category '" + category + "'.
+" +
+    "You are awesome and this CV is made just for you!
+
+" +
+    "Sincerely,
+SmartCV Generator";
+
+  const blob = new Blob([text], { type: "text/plain" });
+  const link = document.createElement("a");
+  link.href = URL.createObjectURL(blob);
+  link.download = "SmartCV_" + category + ".txt";
+  link.click();
+});
 </script>
+
 
 
 <section class="example-section" style="text-align: center; padding: 2em;">
