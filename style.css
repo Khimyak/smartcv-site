@@ -1,44 +1,5 @@
 
-body {
-  font-family: 'Roboto', sans-serif;
-  margin: 0;
-  background-color: #fff;
-  color: #111;
-}
-header {
-  background: #000;
-  color: #fff;
-  padding: 4em 1em;
-  text-align: center;
-}
-header h1 {
-  font-family: 'Playfair Display', serif;
-  font-size: 3em;
-}
-.cta {
-  display: inline-block;
-  margin-top: 1em;
-  padding: 0.7em 1.5em;
-  background: #c5a900;
-  color: #fff;
-  text-decoration: none;
-}
-.categories {
-  padding: 2em;
-  text-align: center;
-}
-.card {
-  background: #f9f9f9;
-  margin: 1em;
-  padding: 1em;
-  display: inline-block;
-  width: 200px;
-  border-radius: 10px;
-}
-footer {
-  background: #111;
-  color: #fff;
-  text-align: center;
-  padding: 2em;
-  font-size: 0.9em;
-}
+body { font-family: Arial, sans-serif; margin: 20px; }
+header, footer { text-align: center; margin-bottom: 20px; }
+input, textarea, select { display: block; width: 100%; margin-bottom: 10px; padding: 10px; }
+.btn { padding: 10px 20px; background: black; color: white; border: none; cursor: pointer; }
