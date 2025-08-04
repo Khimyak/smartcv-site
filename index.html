@@ -1,116 +1,86 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>SmartCV Generator</title>
-  <link href="https://fonts.googleapis.com/css2?family=Playfair+Display&family=Montserrat&family=Roboto&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="style.css" />
+  <script defer src="script.js"></script>
 </head>
 <body>
   <header>
     <h1>SmartCV Generator</h1>
-    <p>100% унікальні резюме. Професійно. Стильно. Результативно.</p>
-    <a href="#form" class="cta">Створити резюме</a>
+    <button id="theme-toggle">Switch Theme</button>
   </header>
-  <section class="categories">
-    <div class="card"><h3>Professional</h3><p>Завод, офіс, логістика</p><span>$4.99</span></div>
-    <div class="card"><h3>Creative</h3><p>Для творчих професій</p><span>$9.99</span></div>
-    <div class="card"><h3>VIP Pack</h3><p>50 резюме/міс</p><span>$59.99</span></div>
-    <div class="card"><h3>Funny</h3><p>Резюме до Санти, кота</p><span>$2.00</span></div>
-    <div class="card"><h3>Romantic</h3><p>Зізнання, анкети</p><span>$2.00</span></div>
-    <div class="card"><h3>Apology</h3><p>Вибачення</p><span>$2.00</span></div>
-    <div class="card"><h3>Entertaining</h3><p>Fan/Spicy CVs</p><span>$2–3.00</span></div>
-  </section>
-  <footer>
-    <p>© 2025 SmartCV Generator</p>
-  </footer>
 
-<section class="form-section" id="form">
-  <h2>Створити резюме</h2>
-  <form id="cvForm">
-    <label for="category">Категорія:</label>
-    <select id="category" name="category" required>
-      <option value="Professional">Professional</option>
-      <option value="Creative">Creative</option>
-      <option value="VIP Pack">VIP Pack</option>
-      <option value="Funny">Funny</option>
-      <option value="Romantic">Romantic</option>
-      <option value="Apology">Apology</option>
-      <option value="Entertaining">Entertaining</option>
-    </select>
+  <main>
+    <section class="hero">
+      <h2>100% Unique Resumes. Professional. Stylish. Effective.</h2>
+      <p>Select a category, fill the form — get your PDF/DOCX resume in 1 minute.</p>
+      <a href="#form-section" class="btn">Create Resume</a>
+    </section>
 
-    <label for="tone">Стиль:</label>
-    <select id="tone" name="tone" required>
-      <option value="Серйозно">Серйозно</option>
-      <option value="З гумором">З гумором</option>
-      <option value="Сексуально">Сексуально</option>
-      <option value="Щиро">Щиро</option>
-    </select>
+    <section id="categories" class="cards">
+      <div class="card"><h3>Professional</h3><p>For work: factory, office, logistics. Includes PDF+DOCX and recommendation letter.</p><strong>$4.99</strong></div>
+      <div class="card"><h3>Creative</h3><p>For creative jobs. Stylish format. Includes PDF+DOCX and recommendation letter.</p><strong>$9.99</strong></div>
+      <div class="card"><h3>VIP Pack</h3><p>Up to 50 resumes/month. Fully automated.</p><strong>$59.99</strong></div>
+      <div class="card"><h3>Funny CVs</h3><p>Jokes for Santa, cat, friends, “give me $20”.</p><strong>$2.00</strong></div>
+      <div class="card"><h3>Romantic CVs</h3><p>Confessions, “I miss you”, sweet profiles.</p><strong>$2.00</strong></div>
+      <div class="card"><h3>Apology CVs</h3><p>Serious or humorous apologies.</p><strong>$2.00</strong></div>
+      <div class="card"><h3>Entertaining</h3><p>Fan CVs, Say It Differently, Spicy (18+)</p><strong>$2–3.00</strong></div>
+    </section>
 
-    <label for="target">Ім’я/кому адресовано:</label>
-    <input type="text" id="target" name="target" placeholder="Наприклад: Ігорю" required />
+    <section id="form-section">
+      <h3>Generate Your Resume</h3>
+      <form id="cv-form">
+        <input type="text" placeholder="Your Name" required />
+        <input type="email" placeholder="Email to receive result" required />
+        <select required>
+          <option value="">Select category</option>
+          <option>Professional</option>
+          <option>Creative</option>
+          <option>VIP</option>
+          <option>Funny</option>
+          <option>Romantic</option>
+          <option>Apology</option>
+          <option>Entertaining</option>
+        </select>
+        <textarea placeholder="Details to include" required></textarea>
+        <label><input type="checkbox" /> Add recommendation letter (for Professional/Creative)</label>
+        <button class="btn">Generate</button>
+      </form>
+    </section>
 
-    <label for="email">Email для надсилання:</label>
-    <input type="email" id="email" name="email" placeholder="you@example.com" required />
-
-    <button type="submit">Згенерувати</button>
-  </form>
+    
+<section class="payment">
+  <h3>Payment</h3>
+  <p>Secure payment via PayPal (Sandbox mode).</p>
+  <div id="paypal-button-container"></div>
 </section>
 
-
+<script src="https://www.paypal.com/sdk/js?client-id=AUkmSeOw6lgBvCD-lQrTqAEEIkpcH91qHzPx5nBYuLIEV1jEVFlItSyek-VVmRAVw9UnYOq_-znV3MI_&currency=USD"></script>
 <script>
-document.getElementById("cvForm").addEventListener("submit", function(e) {
-  e.preventDefault();
-
-  const category = document.getElementById("category").value;
-  const tone = document.getElementById("tone").value;
-  const target = document.getElementById("target").value;
-  const email = document.getElementById("email").value;
-
-  const text = 
-    "SMARTCV RESUME
-
-" +
-    "Category: " + category + "
-" +
-    "Tone: " + tone + "
-" +
-    "To: " + target + "
-
-" +
-    "Dear " + target + ",
-
-" +
-    "This is a sample resume generated in the tone of '" + tone + "' for the category '" + category + "'.
-" +
-    "You are awesome and this CV is made just for you!
-
-" +
-    "Sincerely,
-SmartCV Generator";
-
-  const blob = new Blob([text], { type: "text/plain" });
-  const link = document.createElement("a");
-  link.href = URL.createObjectURL(blob);
-  link.download = "SmartCV_" + category + ".txt";
-  link.click();
-});
+  paypal.Buttons({
+    createOrder: function(data, actions) {
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: '4.99' } // Ціна поки фіксована для тесту
+        }]
+      });
+    },
+    onApprove: function(data, actions) {
+      return actions.order.capture().then(function(details) {
+        alert('Оплата пройшла успішно. Резюме буде надіслано на email!');
+        // TODO: Виклик функції генерації резюме
+      });
+    }
+  }).render('#paypal-button-container');
 </script>
 
+  </main>
 
-
-<section class="example-section" style="text-align: center; padding: 2em;">
-  <a href="SmartCV_Example.pdf" target="_blank" style="
-    background: #444;
-    color: #fff;
-    padding: 0.7em 1.5em;
-    text-decoration: none;
-    font-weight: bold;
-    border-radius: 5px;
-    display: inline-block;
-  ">📎 Переглянути приклад (PDF)</a>
-</section>
-
+  <footer>
+    <p>&copy; 2025 SmartCV Generator. All rights reserved.</p>
+  </footer>
 </body>
 </html>
