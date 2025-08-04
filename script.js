@@ -5,8 +5,9 @@ document.getElementById("send-resume-btn").addEventListener("click", async funct
   const category = document.getElementById("category").value;
   const details = document.getElementById("details").value;
   const recommend = document.getElementById("recommend").checked;
+  const language = document.getElementById("outputLanguage").value;
 
-  if (!name || !email || !category || !details) {
+  if (!name || !email || !category || !details || !language) {
     alert("Please fill all fields first.");
     return;
   }
@@ -16,7 +17,8 @@ document.getElementById("send-resume-btn").addEventListener("click", async funct
     email,
     category,
     details,
-    recommend
+    recommend,
+    language
   };
 
   const res = await fetch("https://hook.us1.make.com/y4cbgq3nh99gw0vxzy3eqckbqrcxz09a", {
