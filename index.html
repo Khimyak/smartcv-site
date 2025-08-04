@@ -7,17 +7,28 @@
   <title>SmartCV Generator</title>
   <link rel="stylesheet" href="style.css" />
   <script defer src="script.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
 </head>
 <body>
   <header>
-    <h1>SmartCV Generator</h1>
+    <h1><i class="fas fa-file-alt"></i> SmartCV Generator</h1>
     <button id="theme-toggle">Switch Theme</button>
   </header>
 
   <main>
     <section class="hero">
-      <h2>100% Unique Resumes. Professional. Stylish. Effective.</h2>
-      <p>Select a category, fill the form — get your translated PDF/DOCX resume.</p>
+      <h2>Create CVs that impress. Instantly.</h2>
+      <p>Select a category, fill the form — get your translated PDF/DOCX resume via email.</p>
+    </section>
+
+    <section class="cards">
+      <div class="card"><h3>Professional</h3><p>For factory, office, logistics. AI-detector safe. PDF+DOCX + 🎁 official style letter.</p><strong>$4.99</strong></div>
+      <div class="card"><h3>Creative</h3><p>For creative jobs. Stylish, AI-safe. PDF+DOCX + 🎁 free-style letter.</p><strong>$9.99</strong></div>
+      <div class="card"><h3>VIP Pack</h3><p>Up to 50 unique resumes/month. Fully automated.</p><strong>$59.99</strong></div>
+      <div class="card"><h3>Funny CVs</h3><p>Santa, cat, friend, “give me $20” – joke CVs.</p><strong>$2.00</strong></div>
+      <div class="card"><h3>Romantic CVs</h3><p>Confessions, “I miss you”, sweet profiles.</p><strong>$2.00</strong></div>
+      <div class="card"><h3>Apology CVs</h3><p>Serious or humorous apologies.</p><strong>$2.00</strong></div>
+      <div class="card"><h3>Entertaining</h3><p>Fan, Say it Differently, Spicy (18+).</p><strong>$3.00</strong></div>
     </section>
 
     <section id="form-section">
@@ -37,7 +48,6 @@
         </select>
         <textarea id="details" placeholder="Details to include (in your own language)" required></textarea>
         <label><input type="checkbox" id="recommend" /> Add recommendation letter</label>
-
         <label for="outputLanguage">Select resume output language:</label>
         <select id="outputLanguage" required>
           <option value="">Select output resume language</option>
@@ -66,7 +76,7 @@
     <section class="payment">
       <h3>Payment</h3>
       <div id="paypal-button-container"></div>
-      <button id="send-resume-btn" class="btn" style="display:none;">Надіслати мені резюме</button>
+      <button id="send-resume-btn" class="btn" style="display:none;">Send My Resume</button>
     </section>
   </main>
 
@@ -84,7 +94,7 @@
       },
       onApprove: function(data, actions) {
         return actions.order.capture().then(function(details) {
-          alert('Оплата успішна! Тепер натисніть “Надіслати мені резюме”.');
+          alert('Payment successful! Now click “Send My Resume”.');
           document.getElementById("send-resume-btn").style.display = "inline-block";
         });
       }
