@@ -1,104 +1,22 @@
 
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>SmartCV Generator</title>
-  <link rel="stylesheet" href="style.css" />
-  <script defer src="script.js"></script>
-  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"/>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SmartCV Generator</title>
 </head>
 <body>
-  <header>
-    <h1><i class="fas fa-file-alt"></i> SmartCV Generator</h1>
-    <button id="theme-toggle">Switch Theme</button>
-  </header>
-
-  <main>
-    <section class="hero">
-      <h2>Create CVs that impress. Instantly.</h2>
-      <p>Select a category, fill the form — get your translated PDF/DOCX resume via email.</p>
-    </section>
-
-    <section class="cards">
-      <div class="card"><h3>Professional</h3><p>For factory, office, logistics. AI-detector safe. PDF+DOCX + 🎁 official style letter.</p><strong>$4.99</strong></div>
-      <div class="card"><h3>Creative</h3><p>For creative jobs. Stylish, AI-safe. PDF+DOCX + 🎁 free-style letter.</p><strong>$9.99</strong></div>
-      <div class="card"><h3>VIP Pack</h3><p>Up to 50 unique resumes/month. Fully automated.</p><strong>$59.99</strong></div>
-      <div class="card"><h3>Funny CVs</h3><p>Santa, cat, friend, “give me $20” – joke CVs.</p><strong>$2.00</strong></div>
-      <div class="card"><h3>Romantic CVs</h3><p>Confessions, “I miss you”, sweet profiles.</p><strong>$2.00</strong></div>
-      <div class="card"><h3>Apology CVs</h3><p>Serious or humorous apologies.</p><strong>$2.00</strong></div>
-      <div class="card"><h3>Entertaining</h3><p>Fan, Say it Differently, Spicy (18+).</p><strong>$3.00</strong></div>
-    </section>
-
-    <section id="form-section">
-      <h3>Generate Your Resume</h3>
-      <form id="cv-form">
-        <input type="text" id="name" placeholder="Your Name" required />
-        <input type="email" id="email" placeholder="Email to receive result" required />
-        <select id="category" required>
-          <option value="">Select category</option>
-          <option>Professional</option>
-          <option>Creative</option>
-          <option>VIP</option>
-          <option>Funny</option>
-          <option>Romantic</option>
-          <option>Apology</option>
-          <option>Entertaining</option>
-        </select>
-        <textarea id="details" placeholder="Details to include (in your own language)" required></textarea>
-        <label><input type="checkbox" id="recommend" /> Add recommendation letter</label>
-        <label for="outputLanguage">Select resume output language:</label>
-        <select id="outputLanguage" required>
-          <option value="">Select output resume language</option>
-          <option value="english">English</option>
-          <option value="french">French</option>
-          <option value="spanish">Spanish</option>
-          <option value="ukrainian">Ukrainian</option>
-          <option value="arabic">Arabic</option>
-          <option value="chinese">Chinese</option>
-          <option value="hindi">Hindi</option>
-          <option value="portuguese">Portuguese</option>
-          <option value="russian">Russian</option>
-          <option value="polish">Polish</option>
-          <option value="vietnamese">Vietnamese</option>
-          <option value="german">German</option>
-          <option value="italian">Italian</option>
-          <option value="turkish">Turkish</option>
-          <option value="persian">Persian</option>
-          <option value="korean">Korean</option>
-          <option value="hebrew">Hebrew</option>
-          <option value="japanese">Japanese</option>
-        </select>
-      </form>
-    </section>
-
-    <section class="payment">
-      <h3>Payment</h3>
-      <div id="paypal-button-container"></div>
-      <button id="send-resume-btn" class="btn" style="display:none;">Send My Resume</button>
-    </section>
-  </main>
-
-  <footer>
-    <p>&copy; 2025 SmartCV Generator. All rights reserved.</p>
-  </footer>
-
-  <script src="https://www.paypal.com/sdk/js?client-id=AUkmSeOw6lgBvCD-lQrTqAEEIkpcH91qHzPx5nBYuLIEV1jEVFlItSyek-VVmRAVw9UnYOq_-znV3MI_&currency=USD"></script>
-  <script>
-    paypal.Buttons({
-      createOrder: function(data, actions) {
-        return actions.order.create({
-          purchase_units: [{ amount: { value: '4.99' } }]
-        });
-      },
-      onApprove: function(data, actions) {
-        return actions.order.capture().then(function(details) {
-          alert('Payment successful! Now click “Send My Resume”.');
-          document.getElementById("send-resume-btn").style.display = "inline-block";
-        });
-      }
-    }).render('#paypal-button-container');
-  </script>
+    <h1>SmartCV Generator</h1>
+    <p>100% унікальні резюме. Професійно. Стильно. Результативно.</p>
+    <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
+        <input type="hidden" name="cmd" value="_xclick">
+        <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
+        <input type="hidden" name="item_name" value="Professional CV">
+        <input type="hidden" name="amount" value="4.99">
+        <input type="hidden" name="currency_code" value="USD">
+        <input type="hidden" name="return" value="https://YOUR_RENDER_URL/generator.html">
+        <input type="submit" value="Купити Professional CV">
+    </form>
 </body>
 </html>
