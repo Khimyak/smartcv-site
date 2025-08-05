@@ -1,39 +1,89 @@
 
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SmartCV Generator</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <style>
         body {
             font-family: Arial, sans-serif;
-            background-color: #f8f8f8;
             margin: 0;
             padding: 0;
+            background-color: #f4f4f4;
+            color: #333;
         }
         header {
-            background: black;
-            color: white;
-            padding: 20px;
+            background-color: #000;
+            color: #fff;
             text-align: center;
+            padding: 30px 10px;
         }
-        h1 { margin: 0; }
+        header h1 {
+            margin: 0;
+            font-size: 2.5em;
+        }
+        header p {
+            margin-top: 5px;
+            font-size: 1.2em;
+            color: #ccc;
+        }
         .container {
             display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 20px;
-            padding: 20px;
+            padding: 30px;
         }
         .card {
-            background: white;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
             padding: 20px;
-            border-radius: 8px;
             text-align: center;
-            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+            transition: transform 0.2s;
+        }
+        .card:hover {
+            transform: translateY(-5px);
         }
         .card h2 {
-            margin: 0 0 10px;
+            margin: 10px 0;
+        }
+        .card p {
+            font-size: 0.95em;
+            color: #666;
+            margin-bottom: 15px;
+        }
+        form input[type="submit"] {
+            background-color: #000;
+            color: #fff;
+            border: none;
+            padding: 10px 20px;
+            font-size: 1em;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        form input[type="submit"]:hover {
+            background-color: #444;
+        }
+        footer {
+            background-color: #000;
+            color: #ccc;
+            text-align: center;
+            padding: 20px 10px;
+            margin-top: 30px;
+            font-size: 0.9em;
+        }
+        footer a {
+            color: #ccc;
+            text-decoration: none;
+        }
+        footer a:hover {
+            color: #fff;
+        }
+        .price {
+            font-weight: bold;
+            color: #000;
         }
     </style>
 </head>
@@ -41,13 +91,15 @@
 
 <header>
     <h1>SmartCV Generator</h1>
-    <p>100% унікальні резюме. Професійно. Стильно. Результативно.</p>
+    <p>100% Unique Resumes. Professional. Stylish. Effective.</p>
 </header>
 
 <div class="container">
-    <!-- Professional -->
+    <!-- Card Template -->
     <div class="card">
-        <h2>Professional — $4.99</h2>
+        <i class="fa-solid fa-briefcase fa-2x"></i>
+        <h2>Professional — <span class="price">$4.99</span></h2>
+        <p>Tailored for your industry. ATS-friendly. Includes free recommendation letter.</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
@@ -55,13 +107,14 @@
             <input type="hidden" name="amount" value="4.99">
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="return" value="https://smartcv-site-0xup.onrender.com/generator.html">
-            <input type="submit" value="Купити">
+            <input type="submit" value="Buy Now">
         </form>
     </div>
 
-    <!-- Creative -->
     <div class="card">
-        <h2>Creative — $9.99</h2>
+        <i class="fa-solid fa-palette fa-2x"></i>
+        <h2>Creative — <span class="price">$9.99</span></h2>
+        <p>Eye-catching layouts for creative professionals. Includes free casual-style recommendation letter.</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
@@ -69,13 +122,14 @@
             <input type="hidden" name="amount" value="9.99">
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="return" value="https://smartcv-site-0xup.onrender.com/generator.html">
-            <input type="submit" value="Купити">
+            <input type="submit" value="Buy Now">
         </form>
     </div>
 
-    <!-- VIP Pack -->
     <div class="card">
-        <h2>VIP Pack — $59.99</h2>
+        <i class="fa-solid fa-crown fa-2x"></i>
+        <h2>VIP Pack — <span class="price">$59.99</span></h2>
+        <p>Up to 50 unique resumes/month. Fully automated premium service.</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
@@ -83,13 +137,14 @@
             <input type="hidden" name="amount" value="59.99">
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="return" value="https://smartcv-site-0xup.onrender.com/generator.html">
-            <input type="submit" value="Купити">
+            <input type="submit" value="Buy Now">
         </form>
     </div>
 
-    <!-- Funny CVs -->
     <div class="card">
-        <h2>Funny CVs — $2.00</h2>
+        <i class="fa-solid fa-face-laugh fa-2x"></i>
+        <h2>Funny CVs — <span class="price">$2.00</span></h2>
+        <p>Humorous CVs for fun occasions or friends.</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
@@ -97,13 +152,14 @@
             <input type="hidden" name="amount" value="2.00">
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="return" value="https://smartcv-site-0xup.onrender.com/generator.html">
-            <input type="submit" value="Купити">
+            <input type="submit" value="Buy Now">
         </form>
     </div>
 
-    <!-- Romantic CVs -->
     <div class="card">
-        <h2>Romantic CVs — $2.00</h2>
+        <i class="fa-solid fa-heart fa-2x"></i>
+        <h2>Romantic CVs — <span class="price">$2.00</span></h2>
+        <p>Romantic messages or creative love-themed CVs.</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
@@ -111,13 +167,14 @@
             <input type="hidden" name="amount" value="2.00">
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="return" value="https://smartcv-site-0xup.onrender.com/generator.html">
-            <input type="submit" value="Купити">
+            <input type="submit" value="Buy Now">
         </form>
     </div>
 
-    <!-- Apology CVs -->
     <div class="card">
-        <h2>Apology CVs — $2.00</h2>
+        <i class="fa-solid fa-handshake fa-2x"></i>
+        <h2>Apology CVs — <span class="price">$2.00</span></h2>
+        <p>Sincere or humorous apology CVs for any occasion.</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
@@ -125,13 +182,14 @@
             <input type="hidden" name="amount" value="2.00">
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="return" value="https://smartcv-site-0xup.onrender.com/generator.html">
-            <input type="submit" value="Купити">
+            <input type="submit" value="Buy Now">
         </form>
     </div>
 
-    <!-- Entertaining -->
     <div class="card">
-        <h2>Entertaining — $3.00</h2>
+        <i class="fa-solid fa-star fa-2x"></i>
+        <h2>Entertaining — <span class="price">$3.00</span></h2>
+        <p>Fan CVs, Say It Differently, or spicy (18+) formats.</p>
         <form action="https://www.paypal.com/cgi-bin/webscr" method="post" target="_top">
             <input type="hidden" name="cmd" value="_xclick">
             <input type="hidden" name="business" value="YOUR_PAYPAL_EMAIL">
@@ -139,10 +197,15 @@
             <input type="hidden" name="amount" value="3.00">
             <input type="hidden" name="currency_code" value="USD">
             <input type="hidden" name="return" value="https://smartcv-site-0xup.onrender.com/generator.html">
-            <input type="submit" value="Купити">
+            <input type="submit" value="Buy Now">
         </form>
     </div>
 </div>
+
+<footer>
+    <p>Contact us: <a href="mailto:support@smartcv.com">support@smartcv.com</a></p>
+    <p>&copy; 2025 SmartCV Generator. All rights reserved.</p>
+</footer>
 
 </body>
 </html>
