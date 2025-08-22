@@ -1,39 +1,29 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SmartCV — Resume Generator</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartCV Generator</title>
+  <link rel="stylesheet" href="style.css" />
 </head>
-<body>
-  <header class="hero">
-    <h1>SmartCV</h1>
-    <p>Create your resume first — pay only when you generate.</p>
+<body class="dark">
+  <header class="site-header">
+    <h1>SmartCV Generator</h1>
+    <p>Обери стиль → Заповни дані → Оплата → Отримай PDF на пошту</p>
   </header>
 
-  <main class="plans">
-    <section class="card">
-      <h2>Professional — $4.99</h2>
-      <p>ATS-friendly resume tailored to your industry.</p>
-      <a class="btn" href="generator.html?plan=professional">Create Resume</a>
-    </section>
-
-    <section class="card">
-      <h2>Creative — $9.99</h2>
-      <p>Eye‑catching layouts for creative professionals.</p>
-      <a class="btn" href="generator.html?plan=creative">Create Resume</a>
-    </section>
-
-    <section class="card">
-      <h2>VIP Pack — $59.99</h2>
-      <p>Up to 50 unique resumes/month, premium service.</p>
-      <a class="btn" href="generator.html?plan=vip">Create Resume</a>
+  <main class="container">
+    <section class="grid cards">
+      <a class="card card-link" href="generator.html?template=professional"><h3>Professional — $4.99</h3><p>Чистий діловий стиль</p><button class="btn">Обрати</button></a>
+      <a class="card card-link" href="generator.html?template=creative"><h3>Creative — $9.99</h3><p>Виділяється візуально</p><button class="btn">Обрати</button></a>
+      <a class="card card-link" href="generator.html?template=vip"><h3>VIP Pack — $59.99</h3><p>Резюме + 2 рекомендаційні листи</p><button class="btn">Обрати</button></a>
+      <a class="card card-link" href="generator.html?template=funny"><h3>Funny CV — $2.00</h3><p>Іронічний стиль</p><button class="btn">Обрати</button></a>
+      <a class="card card-link" href="generator.html?template=romantic"><h3>Romantic CV — $2.00</h3><p>Для знайомств / побачень</p><button class="btn">Обрати</button></a>
+      <a class="card card-link" href="generator.html?template=apology"><h3>Apology CV — $2.00</h3><p>«Вибач, я виправлюсь»</p><button class="btn">Обрати</button></a>
+      <a class="card card-link" href="generator.html?template=entertaining"><h3>Entertaining — $3.00</h3><p>Для контенту</p><button class="btn">Обрати</button></a>
     </section>
   </main>
 
-  <footer class="footer">
-    <p>© SmartCV</p>
-  </footer>
+  <footer class="site-footer"><p>© SmartCV</p></footer>
 </body>
 </html>

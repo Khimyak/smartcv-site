@@ -1,59 +1,79 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>SmartCV — Generate</title>
-  <link rel="stylesheet" href="style.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>SmartCV — Оформлення</title>
+  <link rel="stylesheet" href="style.css" />
+  <!-- jsPDF для PDF -->
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
+  <!-- EmailJS (клієнтське відправлення на email). Заповни publicKey/serviceId/templateId у script.js -->
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
+  <!-- PayPal SDK: заміни YOUR_PAYPAL_CLIENT_ID на свій -->
+  <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=CAD" defer></script>
+  <script src="script.js" defer></script>
 </head>
-<body>
-  <div class="container">
-    <h1>Create your resume <span id="planBadge" class="badge"></span></h1>
-    <form id="cvForm">
-      <label>Full name* <input id="name" required></label>
-      <label>Email* <input id="email" type="email" required></label>
-      <label>Target role* <input id="category" required placeholder="Welder, Driver, QA, ..."></label>
-      <label>Language* 
-        <select id="outputLanguage" required>
-          <option value="English" selected>English</option>
-          <option value="Ukrainian">Ukrainian</option>
-        </select>
-      </label>
-      <label>Details (experience, skills, achievements)* 
-        <textarea id="details" required placeholder="- 5+ years…&#10;- Certificates…&#10;- Tools/tech…"></textarea>
-      </label>
-      <label><input type="checkbox" id="recommend" checked> Include recommendation letters</label>
+<body class="dark">
+  <header class="site-header">
+    <h1>SmartCV — Оформлення</h1>
+  </header>
 
-      <div class="actions">
-        <button id="prepareBtn" type="button" class="btn">Generate preview</button>
-        <button id="resetBtn" type="reset" class="btn">Reset</button>
-      </div>
-      <p class="note">Payment button appears after you click “Generate preview”.</p>
-    </form>
+  <main class="container">
+    <section class="card">
+      <h2>1) Стиль</h2>
+      <div id="chosen" class="chosen">Стиль: <span id="tplName">—</span> • Ціна: <span id="tplPrice">—</span> CAD</div>
+    </section>
 
-    <div id="payBlock">
-      <h3>Step 2 — Secure payment</h3>
-      <p>When you’re ready, pay to receive your files (PDF & DOCX) by email. You’ll also be able to download them here.</p>
-      <div id="paypal-button-container"></div>
-      <div id="status"></div>
-    </div>
+    <section class="card">
+      <h2>2) Дані клієнта</h2>
+      <form id="cvForm">
+        <div class="grid two">
+          <label>Імʼя та прізвище
+            <input name="fullName" type="text" placeholder="Іван Іваненко" required />
+          </label>
+          <label>Посада
+            <input name="title" type="text" placeholder="Welder / Construction Worker" required />
+          </label>
+        </div>
+        <div class="grid two">
+          <label>Email для отримання файлів
+            <input name="email" type="email" placeholder="you@example.com" required />
+          </label>
+          <label>Телефон
+            <input name="phone" type="tel" placeholder="+1 (555) 000-0000" required />
+          </label>
+        </div>
+        <label>Місто, провінція
+          <input name="location" type="text" placeholder="London, ON" required />
+        </label>
+        <label>Про себе
+          <textarea name="summary" rows="3" placeholder="2–3 речення про досвід та сильні сторони" required></textarea>
+        </label>
+        <label>Досвід
+          <textarea name="experience" rows="5" placeholder="Компанія, посада, дати, обовʼязки" required></textarea>
+        </label>
+        <label>Освіта
+          <textarea name="education" rows="3" placeholder="Навчальний заклад, спеціальність, роки"></textarea>
+        </label>
+        <label>Навички (через кому)
+          <input name="skills" type="text" placeholder="Welding, MIG, TIG, Teamwork, ..." />
+        </label>
 
-    <div id="doneBlock">
-      <h3>All set!</h3>
-      <p>We sent your files to <b id="sentTo"></b>. Download them here as well:</p>
-      <div class="actions" id="links"></div>
-    </div>
-  </div>
+        <div class="addons">
+          <label class="checkbox">
+            <input type="checkbox" id="needLetters" /> Додати рекомендаційні листи (2 шт)
+          </label>
+        </div>
+      </form>
+    </section>
 
-  <!-- PayPal SDK (LIVE) -->
-  <script src="https://www.paypal.com/sdk/js?client-id=AS7osnEOQzqtoyPlMENRJTfU1j-PvwmsXEAkqwCkZw4yItf0Z35RV8YDiyjkw2XDMPbcfgDGJJ5NIfWA&currency=USD"></script>
-  <!-- EmailJS -->
-  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
-  <script>(function(){ emailjs.init('tmIS8TPUYf-ZVTpGi'); })();</script>
-  <!-- Generators -->
-  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/docx@8.3.2/build/index.umd.js"></script>
+    <section class="card">
+      <h2>3) Оплата</h2>
+      <p id="payCopy">Після оплати PDF(и) автоматично згенеруються, завантажаться і будуть надіслані на вашу email-адресу.</p>
+      <div id="paypal-container"></div>
+    </section>
+  </main>
 
-  <script src="script.js"></script>
+  <footer class="site-footer"><p>© SmartCV</p></footer>
 </body>
 </html>
