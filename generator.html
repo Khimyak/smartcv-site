@@ -1,75 +1,116 @@
 <!DOCTYPE html>
-<html lang="uk">
+<html lang="en">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>SmartCV — Оформлення</title>
+  <title>SmartCV — Checkout</title>
   <link rel="stylesheet" href="style.css" />
-  <!-- jsPDF для PDF -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
-  <!-- EmailJS (клієнтське відправлення на email). Заповни publicKey/serviceId/templateId у script.js -->
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
-  <!-- PayPal SDK: заміни YOUR_PAYPAL_CLIENT_ID на свій -->
+  <!-- Replace YOUR_PAYPAL_CLIENT_ID -->
   <script src="https://www.paypal.com/sdk/js?client-id=YOUR_PAYPAL_CLIENT_ID&currency=CAD" defer></script>
   <script src="script.js" defer></script>
 </head>
 <body class="dark">
   <header class="site-header">
-    <h1>SmartCV — Оформлення</h1>
+    <h1>SmartCV — Checkout</h1>
   </header>
 
   <main class="container">
     <section class="card">
-      <h2>1) Стиль</h2>
-      <div id="chosen" class="chosen">Стиль: <span id="tplName">—</span> • Ціна: <span id="tplPrice">—</span> CAD</div>
+      <h2>1) Style</h2>
+      <div id="chosen" class="chosen">Style: <span id="tplName">—</span> • Price: <span id="tplPrice">—</span> CAD</div>
     </section>
 
     <section class="card">
-      <h2>2) Дані клієнта</h2>
+      <h2>2) Language</h2>
+      <div class="grid two">
+        <label>Form language
+          <select id="uiLang">
+            <option value="en" selected>English</option>
+            <option value="fr">Français</option>
+            <option value="es">Español</option>
+            <option value="ar">العربية</option>
+            <option value="zh">中文</option>
+            <option value="hi">हिन्दी / ਪੰਜਾਬੀ</option>
+            <option value="tl">Tagalog</option>
+            <option value="pt">Português</option>
+            <option value="ru">Русский</option>
+            <option value="uk">Українська</option>
+          </select>
+        </label>
+        <label>Resume language
+          <select id="cvLang">
+            <option value="en" selected>English</option>
+            <option value="fr">Français</option>
+          </select>
+        </label>
+      </div>
+    </section>
+
+    <section class="card">
+      <h2>3) Your info</h2>
       <form id="cvForm">
         <div class="grid two">
-          <label>Імʼя та прізвище
-            <input name="fullName" type="text" placeholder="Іван Іваненко" required />
+          <label data-i18n="fullName">Full Name
+            <input name="fullName" type="text" placeholder="John Smith" required />
           </label>
-          <label>Посада
+          <label data-i18n="jobTitle">Job Title
             <input name="title" type="text" placeholder="Welder / Construction Worker" required />
           </label>
         </div>
         <div class="grid two">
-          <label>Email для отримання файлів
+          <label data-i18n="email">Email (for receiving files)
             <input name="email" type="email" placeholder="you@example.com" required />
           </label>
-          <label>Телефон
+          <label data-i18n="phone">Phone
             <input name="phone" type="tel" placeholder="+1 (555) 000-0000" required />
           </label>
         </div>
-        <label>Місто, провінція
+        <label data-i18n="location">City, Province / State
           <input name="location" type="text" placeholder="London, ON" required />
         </label>
-        <label>Про себе
-          <textarea name="summary" rows="3" placeholder="2–3 речення про досвід та сильні сторони" required></textarea>
+
+        <div class="grid two">
+          <label data-i18n="purpose">Resume purpose
+            <select name="purpose" id="purpose">
+              <option value="factory">Factory worker</option>
+              <option value="construction">Construction worker</option>
+              <option value="mechanic">Mechanic</option>
+              <option value="other">Other</option>
+            </select>
+          </label>
+          <label data-i18n="subsector">Specialization / trade
+            <select name="subsector" id="subsector">
+              <option value="">—</option>
+            </select>
+          </label>
+        </div>
+
+        <label data-i18n="about">About Me
+          <textarea name="summary" rows="3" placeholder="2–3 sentences about your experience and strengths" required></textarea>
         </label>
-        <label>Досвід
-          <textarea name="experience" rows="5" placeholder="Компанія, посада, дати, обовʼязки" required></textarea>
+        <label data-i18n="experience">Work Experience
+          <textarea name="experience" rows="5" placeholder="Company, job title, dates, responsibilities" required></textarea>
         </label>
-        <label>Освіта
-          <textarea name="education" rows="3" placeholder="Навчальний заклад, спеціальність, роки"></textarea>
+        <label data-i18n="education">Education
+          <textarea name="education" rows="3" placeholder="School, degree, years"></textarea>
         </label>
-        <label>Навички (через кому)
+        <label data-i18n="skills">Skills (comma separated)
           <input name="skills" type="text" placeholder="Welding, MIG, TIG, Teamwork, ..." />
         </label>
 
         <div class="addons">
           <label class="checkbox">
-            <input type="checkbox" id="needLetters" /> Додати рекомендаційні листи (2 шт)
+            <input type="checkbox" id="needLetters" /> <span data-i18n="addLetters">Add Recommendation Letters (2 pcs)</span>
           </label>
         </div>
       </form>
     </section>
 
     <section class="card">
-      <h2>3) Оплата</h2>
-      <p id="payCopy">Після оплати PDF(и) автоматично згенеруються, завантажаться і будуть надіслані на вашу email-адресу.</p>
+      <h2>4) Payment</h2>
+      <p id="payCopy">After payment, your PDF(s) will download automatically and (optionally) be sent to your email.</p>
       <div id="paypal-container"></div>
     </section>
   </main>
