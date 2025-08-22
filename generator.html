@@ -1,87 +1,59 @@
-
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Create Resume | SmartCV Generator</title>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/docx/7.7.0/docx.min.js"></script>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmartCV — Generate</title>
+  <link rel="stylesheet" href="style.css">
 </head>
 <body>
-    <h2>Create Your Resume</h2>
+  <div class="container">
+    <h1>Create your resume <span id="planBadge" class="badge"></span></h1>
     <form id="cvForm">
-        <label>Full Name:</label><br>
-        <input type="text" name="name" required><br><br>
-        <label>Profession:</label><br>
-        <input type="text" name="profession" required><br><br>
-        <label>Resume Type:</label><br>
-        <select name="cvType">
-            <option>Professional</option>
-            <option>Creative</option>
-            <option>VIP Pack</option>
-            <option>Funny CV</option>
-            <option>Romantic CV</option>
-            <option>Apology CV</option>
-            <option>Entertaining</option>
-        </select><br><br>
-        <label>Details (to include in resume):</label><br>
-        <textarea name="details" rows="5" required></textarea><br><br>
-        <label>Email to send your file:</label><br>
-        <input type="email" name="email" required><br><br>
-        <button type="submit">Generate Resume</button>
+      <label>Full name* <input id="name" required></label>
+      <label>Email* <input id="email" type="email" required></label>
+      <label>Target role* <input id="category" required placeholder="Welder, Driver, QA, ..."></label>
+      <label>Language* 
+        <select id="outputLanguage" required>
+          <option value="English" selected>English</option>
+          <option value="Ukrainian">Ukrainian</option>
+        </select>
+      </label>
+      <label>Details (experience, skills, achievements)* 
+        <textarea id="details" required placeholder="- 5+ years…&#10;- Certificates…&#10;- Tools/tech…"></textarea>
+      </label>
+      <label><input type="checkbox" id="recommend" checked> Include recommendation letters</label>
+
+      <div class="actions">
+        <button id="prepareBtn" type="button" class="btn">Generate preview</button>
+        <button id="resetBtn" type="reset" class="btn">Reset</button>
+      </div>
+      <p class="note">Payment button appears after you click “Generate preview”.</p>
     </form>
 
-    <div id="result" style="margin-top:20px;"></div>
+    <div id="payBlock">
+      <h3>Step 2 — Secure payment</h3>
+      <p>When you’re ready, pay to receive your files (PDF & DOCX) by email. You’ll also be able to download them here.</p>
+      <div id="paypal-button-container"></div>
+      <div id="status"></div>
+    </div>
 
-<script>
-document.getElementById("cvForm").addEventListener("submit", async function(event) {
-    event.preventDefault();
+    <div id="doneBlock">
+      <h3>All set!</h3>
+      <p>We sent your files to <b id="sentTo"></b>. Download them here as well:</p>
+      <div class="actions" id="links"></div>
+    </div>
+  </div>
 
-    const name = event.target.name.value;
-    const profession = event.target.profession.value;
-    const cvType = event.target.cvType.value;
-    const details = event.target.details.value;
+  <!-- PayPal SDK (LIVE) -->
+  <script src="https://www.paypal.com/sdk/js?client-id=AS7osnEOQzqtoyPlMENRJTfU1j-PvwmsXEAkqwCkZw4yItf0Z35RV8YDiyjkw2XDMPbcfgDGJJ5NIfWA&currency=USD"></script>
+  <!-- EmailJS -->
+  <script src="https://cdn.jsdelivr.net/npm/emailjs-com@3/dist/email.min.js"></script>
+  <script>(function(){ emailjs.init('tmIS8TPUYf-ZVTpGi'); })();</script>
+  <!-- Generators -->
+  <script src="https://cdn.jsdelivr.net/npm/jspdf@2.5.1/dist/jspdf.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/docx@8.3.2/build/index.umd.js"></script>
 
-    document.getElementById("result").innerHTML = "<p>Generating your resume... please wait.</p>";
-
-    try {
-        const response = await fetch("/generate", {
-            method: "POST",
-            headers: { "Content-Type": "application/json" },
-            body: JSON.stringify({ name, profession, cvType, details })
-        });
-
-        const data = await response.json();
-        const resumeText = data.resume;
-
-        document.getElementById("result").innerHTML = `<pre>${resumeText}</pre>`;
-
-        // PDF generation
-        const { jsPDF } = window.jspdf;
-        const pdf = new jsPDF();
-        pdf.text(resumeText, 10, 10);
-        pdf.save(`${name.replace(/\s+/g, '_')}_resume.pdf`);
-
-        // DOCX generation
-        const doc = new docx.Document({
-            sections: [{
-                properties: {},
-                children: [new docx.Paragraph(resumeText)]
-            }]
-        });
-        docx.Packer.toBlob(doc).then(blob => {
-            const link = document.createElement("a");
-            link.href = URL.createObjectURL(blob);
-            link.download = `${name.replace(/\s+/g, '_')}_resume.docx`;
-            link.click();
-        });
-
-    } catch (error) {
-        document.getElementById("result").innerHTML = "<p>Error generating resume. Please try again.</p>";
-        console.error(error);
-    }
-});
-</script>
+  <script src="script.js"></script>
 </body>
 </html>
