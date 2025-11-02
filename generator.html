@@ -4,17 +4,14 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>SmartCV — Checkout</title>
-  <link rel="stylesheet" href="style.css" />
-
+  <link rel="stylesheet" href="style.css?v=2025-11-02" />
   <!-- libs -->
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js" defer></script>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js" defer></script>
-
-  <!-- TODO: replace LIVE client id -->
+  <!-- IMPORTANT: keep your LIVE Client ID here -->
   <script src="https://www.paypal.com/sdk/js?client-id=LIVE_CLIENT_ID_HERE&currency=CAD" defer></script>
-
   <!-- app -->
-  <script src="script.js" defer></script>
+  <script src="script.js?v=2025-11-02" defer></script>
 </head>
 <body class="dark">
   <header class="site-header">
@@ -25,6 +22,9 @@
     <section class="card">
       <h2>1) Style</h2>
       <div id="chosen" class="chosen">Style: <span id="tplName">—</span> • Price: <span id="tplPrice">—</span> CAD</div>
+      <div id="missingTpl" class="small" style="display:none;margin-top:6px;">
+        Tip: open from <a href="index.html">styles list</a> or add <code>?template=creative</code> to the URL.
+      </div>
     </section>
 
     <section class="card">
@@ -101,13 +101,8 @@
         <label>Education
           <textarea name="education" rows="3" placeholder="School, program, dates"></textarea>
         </label>
-        <label>Skills (comma separated)
-          <input name="skills" type="text" placeholder="Teamwork, Time management, Basic tools" />
-        </label>
-
-        <label>
-          <input type="checkbox" name="recommendations" value="2" />
-          Add Recommendation Letters (2 pcs)
+        <label>Skills (semicolon ; separated)
+          <input name="skills" type="text" placeholder="Teamwork; Time management; Basic tools" />
         </label>
       </form>
     </section>
@@ -116,7 +111,7 @@
       <h2>4) Payment</h2>
       <div id="paypal-buttons"></div>
       <input id="paypal-amount" type="hidden" value="0.00" />
-      <p class="small">After payment, your PDF(s) will download automatically and (optionally) be sent to your email.</p>
+      <p class="small">After payment, your PDF will download automatically.</p>
     </section>
   </main>
 
