@@ -7,14 +7,14 @@
 
   // ---------- Config ----------
   const TEMPLATE_PRICES = {
-    professional: 9.00,
-    creative: 12.00,
-    vippack: 49.00,
-    funny: 5.00,
-    romantic: 7.00,
-    apology: 4.00,
-    entertaining: 3.00
-  };
+  professional: 4.99,
+  creative: 3.99,
+  vippack: 59.99,
+  funny: 2.00,
+  romantic: 2.00,
+  apology: 2.00,
+  entertaining: 3.00
+};
 
   const TEMPLATE_TITLES = {
     professional: "Professional",
