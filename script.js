@@ -114,13 +114,19 @@
     return (Math.round(n * 100) / 100).toFixed(2);
   }
 
-  function setChosenTemplate() {
+  function normalizeTemplateName(t){
+      if(!t) return t;
+      t = String(t).toLowerCase();
+      if (t === 'vip' || t === 'vip-pack' || t === 'vip_pack') return 'vippack';
+      return t;
+    }
+    function setChosenTemplate() {
     const q = getQuery();
-    let tpl = (q.template || "").toLowerCase();
+    let tpl = normalizeTemplateName((q.template || "").toLowerCase());
     let title = TEMPLATE_TITLES[tpl] || (tpl ? tpl[0].toUpperCase()+tpl.slice(1) : "—");
 
     // price override by ?price=
-    let price = q.price ? parseFloat(q.price) : TEMPLATE_PRICES[tpl];
+    let price = q.price ? parseFloat(q.price) : TEMPLATE_PRICES[tpl];\n    if(!isFinite(price) || Number(price) <= 0){ price = TEMPLATE_PRICES[tpl]; }
     if (!isFinite(price)) price = 0;
 
     $("#tplName").textContent = title;
