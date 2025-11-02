@@ -1,17 +1,84 @@
-*{box-sizing:border-box}
-:root{--bg:#0f0f10;--fg:#f5f5f5;--card:#161618;--border:#2a2a2e}
-body{margin:0;font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;line-height:1.55;background:var(--bg);color:var(--fg)}
-.site-header,.site-footer{padding:16px;text-align:center;border-bottom:1px solid var(--border)}
-.site-footer{border-top:1px solid var(--border);border-bottom:none}
-.container{max-width:1200px;margin:24px auto;padding:0 16px}
-.grid{display:grid;gap:16px}
-.cards{grid-template-columns:1fr}
-@media(min-width:700px){.cards{grid-template-columns:repeat(2,1fr)}}
-@media(min-width:1000px){.cards{grid-template-columns:repeat(3,1fr)}}
-@media(min-width:1300px){.cards{grid-template-columns:repeat(4,1fr)}}
-.card{background:var(--card);border:1px solid var(--border);border-radius:14px;padding:16px}
-.card-link{text-decoration:none;color:inherit;display:flex;flex-direction:column;gap:8px;align-items:flex-start}
-.btn{display:inline-block;padding:10px 16px;border-radius:10px;text-decoration:none;border:none;cursor:pointer;font-weight:600;background:#f5f5f5;color:#111}
-label{display:block;font-weight:600}
-input,textarea,select{width:100%;padding:10px;border-radius:10px;border:1px solid var(--border);background:#111214;color:#f5f5f5;margin-top:6px}
-.checkbox{display:flex;align-items:center;gap:8px;font-weight:600}
+/* SmartCV — minimal dark theme */
+:root {
+  --bg: #0f1115;
+  --card: #171a21;
+  --text: #e8ecf1;
+  --muted: #9aa4b2;
+  --accent: #4da3ff;
+  --ok: #3fcf8e;
+  --err: #ff6b6b;
+  --border: #232a36;
+}
+
+* { box-sizing: border-box; }
+html, body { margin:0; padding:0; }
+body.dark {
+  background: var(--bg);
+  color: var(--text);
+  font: 16px/1.5 system-ui, -apple-system, Segoe UI, Roboto, Arial, sans-serif;
+}
+
+.site-header { padding: 20px 16px; border-bottom: 1px solid var(--border); }
+.site-header h1 { margin:0; font-size: 20px; }
+
+.container { max-width: 900px; margin: 24px auto; padding: 0 16px; }
+
+.card {
+  background: var(--card);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 16px;
+  box-shadow: 0 8px 20px rgba(0,0,0,.25);
+}
+
+.grid.two {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+}
+@media (max-width: 720px) {
+  .grid.two { grid-template-columns: 1fr; }
+}
+
+label { display:block; font-size: 14px; color: var(--muted); margin-bottom: 8px; }
+input, select, textarea {
+  width: 100%;
+  padding: 10px 12px;
+  background: #0c0e12;
+  color: var(--text);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  outline: none;
+}
+input::placeholder { color: #576072; }
+
+.chosen { background: #0c0e12; border: 1px dashed var(--border); border-radius: 10px; padding: 10px 12px; color: var(--text); }
+h2 { margin: 6px 0 12px; font-size: 18px; }
+
+.actions { display: flex; gap: 12px; align-items: center; }
+button.primary {
+  padding: 10px 14px;
+  border-radius: 10px;
+  border: 1px solid var(--border);
+  background: var(--accent);
+  color: #001021;
+  font-weight: 600;
+  cursor: pointer;
+}
+.small {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+#toast {
+  position: fixed; left: 50%; bottom: 20px; transform: translateX(-50%);
+  background: #11161f; color: var(--text);
+  border: 1px solid var(--border); border-radius: 8px;
+  padding: 10px 14px; opacity: 0; pointer-events: none;
+  transition: opacity .25s ease;
+}
+#toast.show { opacity: 1; }
+
+/* PayPal container */
+#paypal-buttons { margin-top: 8px; }
