@@ -56,3 +56,64 @@
   }
   document.addEventListener('DOMContentLoaded',()=>{const meta=setChosen();prepareInputs();mountPayPal(meta);});
 })();
+
+// === SmartCV PayPal robust mount (FINAL) ===
+(function(){
+  'use strict';
+  var $ = function(s,root){ return (root||document).querySelector(s); };
+
+  function ensureContainers(){
+    var mount = $('#paypal-button-container');
+    if(!mount){
+      mount = document.createElement('div');
+      mount.id = 'paypal-button-container';
+      (document.querySelector('main')||document.body).appendChild(mount);
+    }
+    var warn = $('#paypal-warn');
+    if(!warn){
+      warn = document.createElement('div');
+      warn.id = 'paypal-warn';
+      warn.style.cssText = 'margin-top:8px;color:#faa';
+      mount.after(warn);
+    }
+    return {mount: mount, warn: warn};
+  }
+
+  function getMeta(){
+    var q = new URL(location.href).searchParams;
+    var plan = (q.get('plan')||'vippack').toLowerCase();
+    var PRICE = { professional:4.99, creative:9.99, vippack:59.99, funny:2.00, romantic:2.00, apology:2.00, entertaining:3.00 };
+    var TITLE = { professional:'Professional', creative:'Creative', vippack:'VIP Pack', funny:'Funny', romantic:'Romantic', apology:'Apology', entertaining:'Entertaining' };
+    return { price:(PRICE[plan]||59.99), title:(TITLE[plan]||'VIP Pack') };
+  }
+
+  function waitPayPal(cb, fail){
+    var tries = 0;
+    (function loop(){
+      if(window.paypal && window.paypal.Buttons) return cb();
+      if(++tries > 60) return fail && fail('PayPal SDK не завантажився (перевір client-id & components=buttons & currency=CAD)');
+      setTimeout(loop, 250);
+    })();
+  }
+
+  function mount(){
+    var meta = getMeta();
+    var ui = ensureContainers();
+    waitPayPal(function(){
+      try{
+        window.paypal.Buttons({
+          style:{layout:'vertical', shape:'rect'},
+          createOrder: function(d,a){ return a.order.create({ purchase_units:[{ amount:{ currency_code:'CAD', value: meta.price.toFixed(2) }, description: 'SmartCV — '+meta.title }] }); },
+          onApprove: function(d,a){ return a.order.capture().then(function(){ alert('Оплата успішна. Файл буде згенеровано.'); }); },
+          onError: function(err){ console.error(err); ui.warn.textContent = 'Помилка PayPal: '+err; }
+        }).render('#paypal-button-container');
+      }catch(e){
+        console.error(e);
+        ui.warn.textContent = 'PayPal render error (перевір контейнер і client-id у SDK)';
+      }
+    }, function(msg){ ensureContainers().warn.textContent = msg; });
+  }
+
+  document.addEventListener('DOMContentLoaded', mount);
+})();
+// === End SmartCV PayPal robust mount (FINAL) ===
