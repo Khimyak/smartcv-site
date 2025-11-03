@@ -110,7 +110,7 @@
     <section class="card">
       <h2>4) Payment</h2>
       <div id="paypal-buttons"></div>
-      <input id="paypal-amount" type="hidden" value="0.00" />
+      <input id="paypal-amount" type="hidden" value="4.99" />
       <p class="small">After payment, your PDF will download automatically.</p>
     </section>
   </main>
@@ -121,10 +121,8 @@
 <script src="https://www.paypal.com/sdk/js?client-id=AS7osnEOQzqtoyPlMENRJTfU1j-PvwmsXEAkqwCkZw4yItf0Z35RV8YDiyjkw2XDMPbcfgDGJJ5NIfWA&components=buttons&currency=CAD&enable-funding=card"></script>
 
 <script>
-paypal.Buttons().render('#paypal-buttons');
-</script>
-  <script>
-(function() {
+(function () {
+  const PRICE = {
   // Ціни для кожної версії
   const PRICE = {
     professional: 4.99,
