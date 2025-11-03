@@ -123,5 +123,44 @@
 <script>
 paypal.Buttons().render('#paypal-buttons');
 </script>
+  <script>
+(function() {
+  // Ціни для кожної версії
+  const PRICE = {
+    professional: 4.99,
+    creative: 9.99,
+    vippack: 59.99,
+    funny: 2.00,
+    romantic: 2.00,
+    apology: 2.00,
+    entertaining: 3.00
+  };
+
+  // Беремо параметр з URL (наприклад ?plan=creative)
+  const url = new URL(window.location.href);
+  const plan = url.searchParams.get("plan")?.toLowerCase() || "professional";
+  const amount = PRICE[plan] ?? 4.99; // за замовчуванням 4.99
+
+  // Прописуємо суму в PayPal
+  const input = document.getElementById("paypal-amount");
+  if (input) input.value = amount.toFixed(2);
+
+  // Створюємо кнопку
+  paypal.Buttons({
+    createOrder: (data, actions) => {
+      return actions.order.create({
+        purchase_units: [{ amount: { value: amount.toFixed(2), currency_code: "CAD" } }]
+      });
+    },
+    onApprove: (data, actions) => {
+      return actions.order.capture().then(() => {
+        alert(`Оплата успішна — ${amount.toFixed(2)} CAD`);
+        // тут запускається твій PDF
+        window.generatePDF && window.generatePDF();
+      });
+    }
+  }).render("#paypal-buttons");
+})();
+</script>
 </body>
 </html>
