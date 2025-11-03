@@ -1,0 +1,52 @@
+<!doctype html>
+<html lang="uk">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>SmartCV — Generator (Patched)</title>
+  <style>
+    body{font-family:system-ui,-apple-system,Segoe UI,Roboto,Arial,sans-serif;background:#0d0f13;color:#e6e6e6;margin:0}
+    .wrap{max-width:900px;margin:24px auto;padding:16px}
+    .card{background:#171a21;border:1px solid #2a2f3a;border-radius:12px;padding:16px;margin-bottom:16px}
+    .small{opacity:.75;font-size:12px}
+  </style>
+</head>
+<body>
+<main class="wrap">
+  <section class="card">
+    <h2>4) Payment</h2>
+    <div id="paypal-buttons"></div>
+    <input id="paypal-amount" type="hidden" value="59.99" />
+    <p class="small">After payment, your PDF will download automatically.</p>
+  </section>
+</main>
+
+<!-- PayPal SDK (CAD) -->
+<script src="https://www.paypal.com/sdk/js?client-id=AS7osnEOQzqtoyPlMENRJTfU1j-PvwmsXEAkqwCkZw4yItf0Z35RV8YDiyjkw2XDMPbcfgDGJJ5NIfWA&components=buttons&currency=CAD"></script>
+
+<script>
+// Read amount either from ?plan=... or hidden input
+(function() {
+  const PRICE = { professional:4.99, creative:9.99, vippack:59.99, funny:2.00, romantic:2.00, apology:2.00, entertaining:3.00 };
+  const q = new URL(location.href).searchParams;
+  const plan = (q.get('plan')||'vippack').toLowerCase();
+  const hidden = document.getElementById('paypal-amount');
+  const amount = (hidden && hidden.value && !isNaN(hidden.value)) ? hidden.value : (PRICE[plan] ?? 59.99).toFixed(2);
+
+  // Mount PayPal into #paypal-buttons
+  paypal.Buttons({
+    style: { layout:'vertical', shape:'rect' },
+    createOrder: (data, actions) => actions.order.create({
+      purchase_units: [{ amount: { currency_code:'CAD', value: String(amount) } }]
+    }),
+    onApprove: (data, actions) => actions.order.capture().then(() => {
+      alert('Оплата успішна. Файл буде згенеровано.');
+      // TODO: викликни свою генерацію файлу тут
+    }),
+    onError: (err) => console.error('PayPal error:', err)
+  }).render('#paypal-buttons');
+})();
+</script>
+
+</body>
+</html>
